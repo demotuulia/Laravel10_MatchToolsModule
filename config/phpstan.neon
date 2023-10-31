@@ -1,0 +1,10 @@
+parameters:
+	level: 3
+	paths:
+		- ../app
+		- ../tests
+		- ../Modules
+		- ../database/migrations
+		- ../database/seeders
+includes:
+    - ../vendor/nunomaduro/larastan/extension.neon

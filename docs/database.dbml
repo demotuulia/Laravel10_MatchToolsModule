@@ -1,0 +1,85 @@
+////////////////////////////////////////////////
+//
+// Script to genearate databaase diagram
+//
+//
+// Docs: https://dbml.dbdiagram.io/docs
+//
+// Generate: https://dbdiagram.io/d
+//
+// You can log in with  you Gmail account.
+//
+////////////////////////////////////////////////
+
+table matches {
+    id integer [primary key]
+    db_code  varchar
+    label  varchar
+    ordering integer
+    match_type e_match_type
+    matches_form_id integer
+}
+
+enum e_match_type {
+ CHECK_BOX
+    MULTIPLE_CHOOSE
+    RADIO_BUTTON
+    EQUAL
+    RANGE
+    BIGGER_THAN
+    SMALLER_THAN
+    DATE_FROM
+    DATE_TO
+    MENU
+}
+
+
+table matches_form {
+  id integer [primary key]
+  name varchar
+}
+
+
+table matches_option_values {
+  id integer [primary key]
+  matches_profile_id integer
+  matches_id integer
+  matches_options_id integer
+}
+
+
+table matches_options {
+  id integer [primary key]
+  matches_id integer
+  value varchar
+}
+table matches_profile {
+  id integer [primary key]
+  user_id integer
+  is_professional integer
+  name varchar
+  description varchar
+  tags varchar
+}
+table matches_values {
+  id integer [primary key]
+  matches_profile_id integer
+  matches_id integer
+  value varchar
+}
+
+table values_form_x{
+    matches_profile_id integer [primary key]
+    name varchar
+    is_professional integer
+    match_aggregation_field_n varchar
+
+}
+
+Ref: matches_form.id > matches.matches_form_id
+Ref: matches.id > matches_options.matches_id
+Ref: matches.id > matches_values.matches_id
+ref: matches.id > matches_option_values.matches_id
+Ref: matches_profile.id > matches_values.matches_profile_id
+Ref: matches_profile.id > matches_option_values.matches_profile_id
+Ref: matches_options.id > matches_option_values.matches_options_id
