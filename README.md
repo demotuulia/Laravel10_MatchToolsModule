@@ -30,7 +30,7 @@ used as an API to search matches between profiles.
 all matches must match with the profile of the opposite party.
 
 To get a quick overview what this module does,
-I advise to have a look of the [Demo Test](/main/Modules/Matches/Tests/Integration/DemoTest.php) or 
+I advise to have a look of the [Demo Test](https://github.com/demotuulia/Laravel10_MatchToolsModule/blob/main/Modules/Matches/Tests/Integration/DemoTest.php) or 
 the [Readme file](https://github.com/demotuulia/VueJs_MatchToolsModuleClient#readme) 
  of the front end part of my project VueJs Matchtools Client.
 
