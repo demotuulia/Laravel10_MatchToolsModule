@@ -60,6 +60,7 @@ for the user management and authorization by standard Laravel.
 
 * Laravel 10
 * Php 8
+* Rest API
 * Mysql with Eloquent
 * Php Unit Tests
 * Code sniffer with Php Psr standards
