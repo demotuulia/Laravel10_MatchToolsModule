@@ -3,12 +3,14 @@
 ###  Contents
 
 * [Introduction](#intro-section)
-    * [Roles](#intro-roles-section)
+  * [Used Technology](#intro-technology-section)
+  * [Roles](#intro-roles-section)
 * [Code](#code-code-section)
   * [Code](#code-code-section)
   * [Tests](#code-tests-section)
   * [Matches](#code-matches-section)
   * [Indexing profiles](#code-indexing-profiles-section)
+* [Database](#database-section)
 * [Endpoints](#endpoints-section)
   * [Registrate](#endpoints-registrate)
   * [Login](#endpoints-login)
@@ -28,10 +30,11 @@ used as an API to search matches between profiles.
 all matches must match with the profile of the opposite party.
 
 To get a quick overview what this module does,
-I advise to have a look of the demo test or the readme file  (TODO) of the front end part of my project (TODO).
+I advise to have a look of the [Demo Test](/main/Modules/Matches/Tests/Integration/DemoTest.php) or 
+the readme file  (TODO) of the front end part of my project (TODO).
 
 This application can be used to define matches between companies and clients.
-In my example  I  use companies with vacancies and professionals with profiles.
+In my example  I use companies with vacancies and professionals with profiles.
 With this tool both of the parties can find matches for their profiles.
 As well this could be used for example for rental apartments or boats.\
 \
@@ -48,7 +51,20 @@ Each profile gets a score by the amount of matches. If the matches are exact the
 In the results the profiles are sorted by the score.
 
 This file is not a full documentation of the project. It gives an overview.
-This is not a complete project. It is focused in the Matches module.
+Also this is not a complete project. It is focused in the Matches module. In the app module are some controllers
+for the user management and authorization by standard Laravel.
+
+
+<a name='intro-technology-section'></a>
+## Used technology
+
+* Laravel 10
+* Php 8
+* Mysql with Eloquent
+* Php Unit Tests
+* Code sniffer with Php Psr standards
+* Phpstan
+
 
 <a name='intro-roles-section'></a>
 ## Roles
@@ -60,6 +76,50 @@ This is not a complete project. It is focused in the Matches module.
 | professional | Can login to the front end and manage his/her profile and find matches for it. |
 
 
+<a name='code-section'></a>
+# Code
+<a name='code-code-section'></a>
+## Code
+This module can be found in the folder ```Modules/Matches```.
+In the app module are some controllers for the user management and authorization by standard Laravel.
+It is written as much as possible by Laravel 10 standards.
+The best way to understand this are the
+[Tests](https://github.com/demotuulia/Laravel10_MatchToolsModule/tree/main/Modules/Matches/Tests)
+
+<a name='code-tests-section'></a>
+## Tests
+This project has been written by test driven development and the tests are found in
+```Modules/Matches/Tests```
+I the test ```Modules/Matches/Tests/Integration/DemoTest.php``` gives an overview of this project.
+For the rest there are basically integration test per controller. The matches search is tested in
+```Modules/Matches/Tests/Features```
+
+<a name='code-matches-section'></a>
+## Matches
+
+The matches are realized by the following factory design pattern:
+
+<img src="docs/img/uml.png">
+
+Each match type has its own service class is which is crated by MatchesTypeManager by the method 'make'.
+
+Each service hase the following functions:
+
+| Function             | Description                                                                                                   |
+|----------------------|---------------------------------------------------------------------------------------------------------------|
+| getSearchQuery       | Return the part of the sql, when the matches are searched by joins from each match. This is very slow method. |
+| getViewSearchQuery   | Return the part of the sql, which is used to search matches from the flat view table.                         |
+| isMatch | This used to define if the match is exact and shoud get a score point.                                        |
+| statistics | Return the quries to render the admin dasboard statistics.                                                    |
+
+<a name='code-indexing-profiles-section'></a>
+## Indexing Profiles
+At the moment the indexing of the profiles is done by dynamic views. Each match has its column in the view. By this way we avoid slow and
+complex views.
+Each time a match is deleted or added a job is stared to reindex the view.
+For more details see [SearchViewService](/Modules/Matches/Services/Search/SearchViewService.php#L32).
+
+
 <a name='database-section'></a>
 # Database
 The tables used for the Matches module are shown below.
@@ -67,7 +127,7 @@ The tables used for the Matches module are shown below.
 
 ### matches_form
 
- A from to include the matches. The administrator can add, delete and modify these fields. 
+ A form to include the matches. The administrator can add, delete and modify these fields. 
 The form is rendered on the client side. There can be several forms, fore-example on per item category.
 
 ### matches
@@ -177,45 +237,6 @@ fields
 
 
 
-<a name='code-section'></a>
-# Code
-<a name='code-code-section'></a>
-## Code
-This module can be found in the folder ```Modules/Matches```
-It is written as much as possible by Laravel 10 standards.
-
-<a name='code-tests-section'></a>
-## Tests
-This proejct has been written by test driven development and the tests are found in
-```Modules/Matches/Tests```
-I the test ```Modules/Matches/Tests/Integration/DemoTest.php``` gives an overview of this project.
-For the rest ther are basically intgeration test per controller. The mathches search is tested in
-```Modules/Matches/Tests/Features```
-
-<a name='code-matches-section'></a>
-## Matches
-
-The matches are realized by the following pattern:
-
-<img src="docs/img/uml.png">
-
-Each match type has its own service class is which is crated by MatchesTypeManager by the method 'make'.
-
-Each service hase the following functions:
-
-| Function             | Description                                                                                                   |
-|----------------------|---------------------------------------------------------------------------------------------------------------|
-| getSearchQuery       | Return the part of the sql, when the matches are searched by joins from each match. This is very slow method. |
-| getViewSearchQuery   | Return the part of the sql, which is used to search matches from the flat view table.                         |
-| isMatch | This used to define if the match is exact and shoud get a score point.                                        |
-| statistics | Return the quries to render the admin dasboard statistics.                                                    |
-
-<a name='code-indexing-profiles-section'></a>
-## Indexing Profiles
-At the moment the indexing of the profiles is done by dynamic views. Each match has its column in the view. By this way we avoid slow and
-complex views.
- Each time a match is deleted or added a job is stared to reindex the view.
-For more details see TODO.
 
 
 
@@ -697,7 +718,8 @@ Install docker,  git  and nginx
 
 
 ## Clone and build
-1) Clone the project to your chosen directory bu TODO:
+1) Clone the project to your chosen directory by :
+```git clone https://github.com/demotuulia/Laravel10_MatchToolsModule.git```
 
 2) Go to the folder and do:
 ```
@@ -757,3 +779,4 @@ curl --location 'http://localhost:8000/api/login' \
 ```
 ./scripts/startWorker.sh
 ```
+
