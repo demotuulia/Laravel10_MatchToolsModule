@@ -31,7 +31,8 @@ all matches must match with the profile of the opposite party.
 
 To get a quick overview what this module does,
 I advise to have a look of the [Demo Test](/main/Modules/Matches/Tests/Integration/DemoTest.php) or 
-the readme file  (TODO) of the front end part of my project (TODO).
+the [Readme file](https://github.com/demotuulia/VueJs_MatchToolsModuleClient#readme) 
+ of the front end part of my project VueJs Matchtools Client.
 
 This application can be used to define matches between companies and clients.
 In my example  I use companies with vacancies and professionals with profiles.
