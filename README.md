@@ -28,7 +28,7 @@ used as an API to search matches between profiles.
 all matches must match with the profile of the opposite party.
 
 To get a quick overview what this module does,
-I advise to have a look of the  [Demo Test](/main/Modules/Matches/Tests/Integration/DemoTest.php) or the readme file of the front end part of my project (TODO).
+I advise to have a look of the demo test or the readme file  (TODO) of the front end part of my project (TODO).
 
 This application can be used to define matches between companies and clients.
 In my example  I  use companies with vacancies and professionals with profiles.
@@ -215,7 +215,7 @@ Each service hase the following functions:
 At the moment the indexing of the profiles is done by dynamic views. Each match has its column in the view. By this way we avoid slow and
 complex views.
  Each time a match is deleted or added a job is stared to reindex the view.
-For more details see [SearchViewService](/Modules/Matches/Services/Search/SearchViewService.php#L32).
+For more details see TODO.
 
 
 
@@ -697,8 +697,7 @@ Install docker,  git  and nginx
 
 
 ## Clone and build
-1) Clone the project to your chosen directory by :
-```git clone https://github.com/demotuulia/Laravel10_MatchToolsModule.git```
+1) Clone the project to your chosen directory bu TODO:
 
 2) Go to the folder and do:
 ```
