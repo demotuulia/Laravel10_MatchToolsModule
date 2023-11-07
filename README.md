@@ -729,7 +729,7 @@ docker-compose up -d
 ## Install composer files and configure
 
 1) You can log in the container by the command:
-```./scripts/ssh.sh```
+```./scripts/ssh.sh./scripts/ssh.sh```
 
 
 2) Install vendor files
@@ -742,8 +742,9 @@ You don't need to modify anything.
    ```cp .env.example .env.testing```
    And change:
 ```
+   APP_ENV=local ==> APP_ENV=testing
    DB_DATABASE=laravel_db_name  ==>  DB_DATABASE=laravel_db_name_test
-  
+ 
 ```
 5) Generate Keys
 ```_

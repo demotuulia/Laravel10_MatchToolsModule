@@ -5,6 +5,15 @@
 #
 #
 
+# clean up the caches
+php artisan cache:clear
+php artisan config:cache
+php artisan route:cache
+php artisan optimize
+php artisan config:cache --env=testing
+
+# Authorize laravel_db_user to use the database  laravel_db_name_test
+mysql -hdb -u root -proot <scripts/sql/authorizeTestUser.sql
 # clean up databases
 mysql -hdb -u root -proot <scripts/sql/cleanAll.sql
 
